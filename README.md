@@ -1,3 +1,5 @@
+[![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
+
 # swiftmulticastprotocol
 Easy way to use a multicast intefrace
 
@@ -131,3 +133,14 @@ sharedAppCore.messageDelegate.newMessageReceived(message)
 ```
 
 ClassA and ClassB will be informed and will receive the message.
+
+
+Author & License
+-------
+
+swiftmulticastprotocol was created and mantained by Becchetti Luca.
+
+- Email: [luca.becchetti@brokenice.it](<mailto:luca.becchetti@brokenice.it>)
+- Website: [brokenice.it](<http://www.brokenice.it>)
+
+While swiftmulticastprotocol is free to use and change (I'm happy to discuss any PR with you)
