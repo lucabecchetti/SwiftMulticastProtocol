@@ -5,7 +5,7 @@ With this simple method you can implement a multicast interface to send a messag
 
 For example, to create a simple chat application, you have a UITableView with a list of chats, and you have another class called ChatActivity with a UICollectionView of messages. Both class want to know when new message has been received or delivered. First class to show a badge count, second class to show bubble message.  First of all you have to create your interface, for example:
 
-```
+```swift
 import Foundation
 
 @objc protocol MessageDelegate:CustomDelegate {
@@ -20,7 +20,7 @@ import Foundation
 
 To be able to have a multiple connection to this protocol, create a multicast delegate like this:
 
-```
+```swift
 class MessageDelegateMulticast {
     
     private var notifiers: [MessageDelegate] = []
@@ -65,7 +65,7 @@ class MessageDelegateMulticast {
 
 In a singelton class create an instance of multicast in like this:
 
-```
+```swift
 class AppCore:NSObject{
   
   ...
@@ -80,7 +80,7 @@ let sharedAppCore = AppCore()
 
 Each class, to receive the message can subscribe to a delegate:
 
-```
+```swift
 class ClientA:MessageDelegate{
   
   override func viewDidLoad() {
@@ -126,7 +126,7 @@ class ClientB:MessageDelegate{
 
 Now when method of delegate is called like this:
 
-```
+```swift
 sharedAppCore.messageDelegate.newMessageReceived(message)
 ```
 
