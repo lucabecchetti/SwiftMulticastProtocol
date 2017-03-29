@@ -141,6 +141,6 @@ Author & License
 swiftmulticastprotocol was created and mantained by Becchetti Luca.
 
 - Email: [luca.becchetti@brokenice.it](<mailto:luca.becchetti@brokenice.it>)
-- Website: [brokenice.it](<http://www.brokenice.it>)
+- Website: [www.brokenice.it](<http://www.brokenice.it>)
 
 While swiftmulticastprotocol is free to use and change (I'm happy to discuss any PR with you)
