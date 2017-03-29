@@ -10,7 +10,7 @@ For example, to create a simple chat application, you have a UITableView with a 
 ```swift
 import Foundation
 
-@objc protocol MessageDelegate:CustomDelegate {
+@objc protocol MessageDelegate {
     
     ///Called when new message has been received
     func newMessageReceived(message: ChatMessage)
