@@ -32,10 +32,10 @@ class MessageDelegateMulticast {
             notifier.newMessageReceived(message)
         }
     }
-    func newGroupMessageReceived(message: ChatMessages, eventID:String){
+    func newMessageDelivered(message: ChatMessages){
         notifyAll { notifier in
-            if(notifier.newGroupMessageReceived != nil){
-                notifier.newGroupMessageReceived!(message,eventID: eventID)
+            if(notifier.newMessageDelivered != nil){
+                notifier.newMessageDelivered!(message)
             }
         }
     }
