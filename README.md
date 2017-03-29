@@ -1,6 +1,6 @@
 [![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
 
-# swiftmulticastprotocol
+# SwiftMulticastProtocol
 Easy way to use a multicast intefrace
 
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
