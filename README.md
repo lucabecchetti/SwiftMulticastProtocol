@@ -4,6 +4,7 @@ Easy way to use a multicast intefrace
 <p align="center">
 <img src="https://user-images.githubusercontent.com/16253548/28453311-1919a444-6df7-11e7-9ffd-e4438c01c903.png" width="400px">
 </p>
+
 [![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
 
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
