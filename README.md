@@ -15,117 +15,109 @@ For example, to create a simple chat application, you have a UITableView with a 
 ```swift
 import Foundation
 
+/// Custom type, edit as you need
+typealias ChatMessage = String
+
+/// Delegate to implement in all classes
 @objc protocol MessageDelegate {
     
     ///Called when new message has been received
     func newMessageReceived(message: ChatMessage)
-    ///Called when new message has been delivered
-    optional func newMessageDelivered(messagge: ChatMessage)
-
+    
 }
 ```
 
 To be able to have a multiple connection to this protocol, create a multicast delegate like this:
 
 ```swift
+/// Delegate multicast
 class MessageDelegateMulticast {
     
+    //Array of registered classes
     private var notifiers: [MessageDelegate] = []
     
-    func newMessageReceived(message: ChatMessages){
-        notifyAll { notifier in
-            notifier.newMessageReceived(message)
-        }
-    }
-    func newMessageDelivered(message: ChatMessages){
-        notifyAll { notifier in
-            if(notifier.newMessageDelivered != nil){
-                notifier.newMessageDelivered!(message)
-            }
-        }
-    }
     
+    /// New message received method
+    ///
+    /// - Parameter message: custom message type
+    func newMessageReceived(message: ChatMessage){
+        //Notify to all classes
+        notifyAll { notifier in
+            notifier.newMessageReceived(message: message)
+        }
+    }
+
+    
+    /// Method Register class from multicast, usually called in ViewDidLoad
+    ///
+    /// - Parameter notifier: class that implement MessageDelegate
     func addNotifier(notifier: MessageDelegate) {
-        removeNotifier(notifier)
+        removeNotifier(notifier: notifier)
         notifiers.append(notifier)
     }
     
+    /// Method to unregister class from multicast, usually called in ViewDidDisappear
+    ///
+    /// - Parameter notifier: class that implement MessageDelegate
     func removeNotifier(notifier: MessageDelegate) {
         for i in 0 ..< notifiers.count {
             if notifiers[i] === notifier || object_getClassName(notifiers[i]) ==  object_getClassName(notifier) {
-                notifiers.removeAtIndex(i)
+                notifiers.remove(at: i)
                 break;
             }
         }
     }
     
-    private func notifyAll(notify: MessageDelegate -> ()) {
+    
+    /// Method that notify to all registered classes
+    ///
+    /// - Parameter notify: class that implement MessageDelegate
+    private func notifyAll(notify: (MessageDelegate) -> ()) {
         for notifier in notifiers {
             notify(notifier)
         }
     }
     
 }
+
+/// Singleton class for multicast
+let messageDelegateMulticast = MessageDelegateMulticast()
 ```
 
 ## USAGE
-
-In a singelton class create an instance of multicast in like this:
-
-```swift
-class AppCore:NSObject{
-  
-  ...
-  
-  var messageDelegate:MessageDelegateMulticast = MessageDelegateMulticast()
-  
-  ...
-  
-}
-let sharedAppCore = AppCore()
-```
-
 Each class, to receive the message can subscribe to a delegate:
 
 ```swift
 class ClientA:MessageDelegate{
   
   override func viewDidLoad() {
-    sharedAppCore.messageDelegate.addNotifier(self)
+    messageDelegateMulticast.addNotifier(self)
   }
   
   override func viewDidDisappear(animated: Bool) {
-    sharedAppCore.messageDelegate.removeNotifier(self)
+    messageDelegateMulticast.removeNotifier(self)
   }
   
   //MARK
   func newMessageReceived(message: ChatMessage){
-    print("New message has been received")  
+    print("Message received from A: \(message)")  
   }
-  
-  func newMessageDelivered(messagge: ChatMessage){
-    print("New message has been sent")  
-  }
-  
+
 }
 
 class ClientB:MessageDelegate{
   
   override func viewDidLoad() {
-    sharedAppCore.messageDelegate.addNotifier(self)
+    messageDelegateMulticast.addNotifier(self)
   }
   
   override func viewDidDisappear(animated: Bool) {
-    sharedAppCore.messageDelegate.removeNotifier(self)
+    messageDelegateMulticast.removeNotifier(self)
   }
   
   //MARK
   func newMessageReceived(message: ChatMessage){
-    print("New message has been received")  
-  }
-  
-  func newMessageDelivered(messagge: ChatMessage){
-    print("New message has been sent")  
+    print("Message received from B: \(message)")  
   }
   
 }
@@ -134,7 +126,7 @@ class ClientB:MessageDelegate{
 Now when method of delegate is called like this:
 
 ```swift
-sharedAppCore.messageDelegate.newMessageReceived(message)
+messageDelegateMulticast.newMessageReceived(message)
 ```
 
 ClassA and ClassB will be informed and will receive the message.
