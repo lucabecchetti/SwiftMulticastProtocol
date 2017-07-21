@@ -134,13 +134,30 @@ sharedAppCore.messageDelegate.newMessageReceived(message)
 
 ClassA and ClassB will be informed and will receive the message.
 
+## Projects using SwiftMulticastProtocol
 
-Author & License
--------
+- Frind - [www.frind.it](https://www.frind.it) 
 
-swiftmulticastprotocol was created and mantained by Becchetti Luca.
+### Your App and SwiftMulticastProtocol
+I'm interested in making a list of all projects which use this library. Feel free to open an Issue on GitHub with the name and links of your project; we'll add it to this site.
 
-- Email: [luca.becchetti@brokenice.it](<mailto:luca.becchetti@brokenice.it>)
-- Website: [www.brokenice.it](<http://www.brokenice.it>)
+## Credits & License
+SwiftMulticastProtocol is owned and maintained by [Luca Becchetti](https://github.com/lucabecchetti) 
 
-While swiftmulticastprotocol is free to use and change (I'm happy to discuss any PR with you)
+As open source creation any help is welcome!
+
+The code of this library is is free to use and change (I'm happy to discuss any PR with you)
+
+## About me
+
+I am a professional programmer with a background in software design and development, currently developing my qualitative skills on a startup company named "[Frind](https://www.frind.it) " as Project Manager and ios senior software engineer.
+
+I'm high skilled in Software Design (10+ years of experience), i have been worked since i was young as webmaster, and i'm a senior Php developer. In the last years i have been worked hard with mobile application programming, Swift for ios world, and Java for Android world.
+
+I'm an expert mobile developer and architect with several years of experience of team managing, design and development on all the major mobile platforms: iOS, Android (3+ years of experience).
+
+I'm also has broad experience on Web design and development both on client and server side and API /Networking design. 
+
+All my last works are hosted on AWS Amazon cloud, i'm able to configure a netowrk, with Unix servers. For my last works i configured apache2, ssl, ejabberd in cluster mode, Api servers with load balancer, and more.
+
+I live in Assisi (Perugia), a small town in Italy, for any question, [contact me](mailto:luca.becchetti@brokenice.it)
