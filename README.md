@@ -9,7 +9,7 @@ Easy way to use a multicast intefrace
 [![Swift3](https://img.shields.io/badge/swift3-compatible-brightgreen.svg)]()
 
 <p align="center" >★★ <b>Star our github repository to help us!</b> ★★</p>
-<p align="center" >Created by <a href="https://github.com/lucabecchetti">Luca Becchetti</a></p>
+<p align="center" >Created by <a href="http://www.lucabecchetti.com">Luca Becchetti</a></p>
 
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
 
@@ -142,7 +142,7 @@ ClassA and ClassB will be informed and will receive the message.
 I'm interested in making a list of all projects which use this library. Feel free to open an Issue on GitHub with the name and links of your project; we'll add it to this site.
 
 ## Credits & License
-SwiftMulticastProtocol is owned and maintained by [Luca Becchetti](https://github.com/lucabecchetti) 
+SwiftMulticastProtocol is owned and maintained by [Luca Becchetti](http://www.lucabecchetti.com) 
 
 As open source creation any help is welcome!
 
