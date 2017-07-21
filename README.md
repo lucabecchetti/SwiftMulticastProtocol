@@ -13,6 +13,10 @@ Easy way to use a multicast intefrace
 
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
 
+## Demo
+
+![ezgif-2-a1f606f074](https://user-images.githubusercontent.com/16253548/28473610-a1fad744-6e45-11e7-87e5-2f4d89414037.gif)
+
 For example, to create a simple chat application, you have a UITableView with a list of chats, and you have another class called ChatActivity with a UICollectionView of messages. Both class want to know when new message has been received or delivered. First class to show a badge count, second class to show bubble message.  First of all you have to create your interface, for example:
 
 ```swift
