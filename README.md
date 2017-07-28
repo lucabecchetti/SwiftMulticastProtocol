@@ -8,10 +8,19 @@ Easy way to use a multicast intefrace
 [![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
 [![Swift3](https://img.shields.io/badge/swift3-compatible-brightgreen.svg)]()
 
-<p align="center" >★★ <b>Star our github repository to help us!</b> ★★</p>
+<p align="center" >★★ <b>Star our github repository to help us!, or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BZD2RPBADPA6G" target="_blank"> ☕ pay me a coffee</a></b> ★★</p>
 <p align="center" >Created by <a href="http://www.lucabecchetti.com">Luca Becchetti</a></p>
 
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
+
+## You also may like
+
+Do you like `SwiftMultiSelect`? I'm also working on several other opensource libraries.
+
+Take a look here:
+
+* **[InAppNotify](https://github.com/lucabecchetti/InAppNotify)** - Manage in app notifications
+* **[SwiftMultiSelect](https://github.com/lucabecchetti/SwiftMultiSelect)** - Multiselection table view
 
 ## Demo
 
