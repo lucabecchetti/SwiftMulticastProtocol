@@ -20,7 +20,8 @@ Do you like `SwiftMultiSelect`? I'm also working on several other opensource lib
 Take a look here:
 
 * **[InAppNotify](https://github.com/lucabecchetti/InAppNotify)** - Manage in app notifications
-* **[SwiftMultiSelect](https://github.com/lucabecchetti/SwiftMultiSelect)** - Multiselection table view
+* **[CountriesViewController](https://github.com/lucabecchetti/CountriesViewController)** - Countries selection view
+* **[SwiftMultiSelect](https://github.com/lucabecchetti/SwiftMultiSelect)** - Generic multi selection tableview
 
 ## Demo
 
