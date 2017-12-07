@@ -8,124 +8,133 @@ Easy way to use a multicast intefrace
 [![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
 [![Swift3](https://img.shields.io/badge/swift3-compatible-brightgreen.svg)]()
 
+<p align="center" >★★ <b>Star our github repository to help us!, or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BZD2RPBADPA6G" target="_blank"> ☕ pay me a coffee</a></b> ★★</p>
+<p align="center" >Created by <a href="http://www.lucabecchetti.com">Luca Becchetti</a></p>
+
 With this simple method you can implement a multicast interface to send a message from one class to all registered instances.
+
+## You also may like
+
+Do you like `SwiftMultiSelect`? I'm also working on several other opensource libraries.
+
+Take a look here:
+
+* **[InAppNotify](https://github.com/lucabecchetti/InAppNotify)** - Manage in app notifications
+* **[CountriesViewController](https://github.com/lucabecchetti/CountriesViewController)** - Countries selection view
+* **[SwiftMultiSelect](https://github.com/lucabecchetti/SwiftMultiSelect)** - Generic multi selection tableview
+
+## Demo
+
+![giphy](https://user-images.githubusercontent.com/16253548/28473878-b729ddf8-6e46-11e7-922c-0891a15de245.gif)
 
 For example, to create a simple chat application, you have a UITableView with a list of chats, and you have another class called ChatActivity with a UICollectionView of messages. Both class want to know when new message has been received or delivered. First class to show a badge count, second class to show bubble message.  First of all you have to create your interface, for example:
 
 ```swift
 import Foundation
 
+/// Custom type, edit as you need
+typealias ChatMessage = String
+
+/// Delegate to implement in all classes
 @objc protocol MessageDelegate {
     
     ///Called when new message has been received
     func newMessageReceived(message: ChatMessage)
-    ///Called when new message has been delivered
-    optional func newMessageDelivered(messagge: ChatMessage)
-
+    
 }
 ```
 
 To be able to have a multiple connection to this protocol, create a multicast delegate like this:
 
 ```swift
+/// Delegate multicast
 class MessageDelegateMulticast {
     
+    //Array of registered classes
     private var notifiers: [MessageDelegate] = []
     
-    func newMessageReceived(message: ChatMessages){
-        notifyAll { notifier in
-            notifier.newMessageReceived(message)
-        }
-    }
-    func newMessageDelivered(message: ChatMessages){
-        notifyAll { notifier in
-            if(notifier.newMessageDelivered != nil){
-                notifier.newMessageDelivered!(message)
-            }
-        }
-    }
     
+    /// New message received method
+    ///
+    /// - Parameter message: custom message type
+    func newMessageReceived(message: ChatMessage){
+        //Notify to all classes
+        notifyAll { notifier in
+            notifier.newMessageReceived(message: message)
+        }
+    }
+
+    
+    /// Method Register class from multicast, usually called in ViewDidLoad
+    ///
+    /// - Parameter notifier: class that implement MessageDelegate
     func addNotifier(notifier: MessageDelegate) {
-        removeNotifier(notifier)
+        removeNotifier(notifier: notifier)
         notifiers.append(notifier)
     }
     
+    /// Method to unregister class from multicast, usually called in ViewDidDisappear
+    ///
+    /// - Parameter notifier: class that implement MessageDelegate
     func removeNotifier(notifier: MessageDelegate) {
         for i in 0 ..< notifiers.count {
             if notifiers[i] === notifier || object_getClassName(notifiers[i]) ==  object_getClassName(notifier) {
-                notifiers.removeAtIndex(i)
+                notifiers.remove(at: i)
                 break;
             }
         }
     }
     
-    private func notifyAll(notify: MessageDelegate -> ()) {
+    
+    /// Method that notify to all registered classes
+    ///
+    /// - Parameter notify: class that implement MessageDelegate
+    private func notifyAll(notify: (MessageDelegate) -> ()) {
         for notifier in notifiers {
             notify(notifier)
         }
     }
     
 }
+
+/// Singleton class for multicast
+let messageDelegateMulticast = MessageDelegateMulticast()
 ```
 
 ## USAGE
-
-In a singelton class create an instance of multicast in like this:
-
-```swift
-class AppCore:NSObject{
-  
-  ...
-  
-  var messageDelegate:MessageDelegateMulticast = MessageDelegateMulticast()
-  
-  ...
-  
-}
-let sharedAppCore = AppCore()
-```
-
 Each class, to receive the message can subscribe to a delegate:
 
 ```swift
 class ClientA:MessageDelegate{
   
   override func viewDidLoad() {
-    sharedAppCore.messageDelegate.addNotifier(self)
+    messageDelegateMulticast.addNotifier(self)
   }
   
   override func viewDidDisappear(animated: Bool) {
-    sharedAppCore.messageDelegate.removeNotifier(self)
+    messageDelegateMulticast.removeNotifier(self)
   }
   
   //MARK
   func newMessageReceived(message: ChatMessage){
-    print("New message has been received")  
+    print("Message received from A: \(message)")  
   }
-  
-  func newMessageDelivered(messagge: ChatMessage){
-    print("New message has been sent")  
-  }
-  
+
 }
 
 class ClientB:MessageDelegate{
   
   override func viewDidLoad() {
-    sharedAppCore.messageDelegate.addNotifier(self)
+    messageDelegateMulticast.addNotifier(self)
   }
   
   override func viewDidDisappear(animated: Bool) {
-    sharedAppCore.messageDelegate.removeNotifier(self)
+    messageDelegateMulticast.removeNotifier(self)
   }
   
   //MARK
   func newMessageReceived(message: ChatMessage){
-    print("New message has been received")  
-  }
-  
-  func newMessageDelivered(messagge: ChatMessage){
-    print("New message has been sent")  
+    print("Message received from B: \(message)")  
   }
   
 }
@@ -134,7 +143,7 @@ class ClientB:MessageDelegate{
 Now when method of delegate is called like this:
 
 ```swift
-sharedAppCore.messageDelegate.newMessageReceived(message)
+messageDelegateMulticast.newMessageReceived(message)
 ```
 
 ClassA and ClassB will be informed and will receive the message.
@@ -147,7 +156,7 @@ ClassA and ClassB will be informed and will receive the message.
 I'm interested in making a list of all projects which use this library. Feel free to open an Issue on GitHub with the name and links of your project; we'll add it to this site.
 
 ## Credits & License
-SwiftMulticastProtocol is owned and maintained by [Luca Becchetti](https://github.com/lucabecchetti) 
+SwiftMulticastProtocol is owned and maintained by [Luca Becchetti](http://www.lucabecchetti.com) 
 
 As open source creation any help is welcome!
 
